@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Detalle Especial 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amor Galáctico</title>
 
   <style>
     * {
@@ -14,102 +14,182 @@
     }
 
     body {
-      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(270deg, #ff9eb5, #ff4f8b, #7b2c56);
-      background-size: 600% 600%;
-      animation: fondo 12s ease infinite;
-      overflow: hidden;
       color: white;
+      background: radial-gradient(circle at top, #3b0a58, #120020 45%, #020007 100%);
     }
 
-    @keyframes fondo {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .galaxia {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,180,255,0.8) 1px, transparent 2px),
+        radial-gradient(circle, rgba(150,200,255,0.8) 1px, transparent 2px);
+      background-size: 80px 80px, 130px 130px, 200px 200px;
+      animation: moverEstrellas 30s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes moverEstrellas {
+      from {
+        background-position: 0 0, 0 0, 0 0;
+      }
+      to {
+        background-position: 800px 800px, -600px 500px, 400px -700px;
+      }
+    }
+
+    .planeta {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffb3d9, #9b2cff, #23003d);
+      box-shadow: 0 0 60px #d66bff;
+      top: 8%;
+      right: 8%;
+      animation: flotar 5s ease-in-out infinite;
+    }
+
+    .planeta::before {
+      content: "";
+      position: absolute;
+      width: 310px;
+      height: 70px;
+      border: 3px solid rgba(255, 210, 255, 0.7);
+      border-radius: 50%;
+      top: 75px;
+      left: -45px;
+      transform: rotate(-18deg);
+    }
+
+    @keyframes flotar {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-25px);
+      }
     }
 
     .card {
-      text-align: center;
-      padding: 50px 30px;
-      border-radius: 25px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-      max-width: 600px;
-      width: 90%;
+      position: relative;
       z-index: 2;
+      width: 90%;
+      max-width: 700px;
+      padding: 45px 30px;
+      text-align: center;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0 45px rgba(255, 100, 220, 0.35);
     }
 
     h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin-bottom: 20px;
-      color: #fff0f5;
+      color: #ffd6ff;
+      text-shadow: 0 0 20px #ff6bd6;
     }
 
-    .texto {
-      font-size: 1.3rem;
-      border-right: 3px solid white;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: escribir 4s steps(50) forwards, parpadeo 0.8s infinite;
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #fff1ff;
+      margin-bottom: 25px;
     }
 
-    @keyframes escribir {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes parpadeo {
-      50% { border-color: transparent; }
+    .frase {
+      font-style: italic;
+      color: #ffc2e8;
     }
 
     button {
-      margin-top: 30px;
-      padding: 12px 30px;
+      padding: 14px 35px;
       border: none;
       border-radius: 40px;
-      background: #ff4f8b;
+      background: linear-gradient(45deg, #ff3cac, #784ba0, #2b86c5);
       color: white;
       font-size: 1rem;
       cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 60, 172, 0.6);
       transition: 0.3s;
     }
 
     button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #ff9eb5;
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(255, 180, 255, 0.9);
     }
 
-    .extra {
-      margin-top: 20px;
+    .mensaje {
       display: none;
+      margin-top: 25px;
       font-size: 1.2rem;
+      color: #ffe4ff;
+      animation: aparecer 1s ease;
     }
 
-    /* partículas */
-    .particula {
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .corazon {
       position: absolute;
-      bottom: -20px;
-      font-size: 18px;
-      color: rgba(255,255,255,0.6);
+      bottom: -40px;
+      color: rgba(255, 150, 220, 0.8);
+      font-size: 22px;
       animation: subir linear infinite;
+      z-index: 1;
     }
 
     @keyframes subir {
       0% {
-        transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1) rotate(0deg);
         opacity: 0;
       }
       20% {
         opacity: 1;
       }
       100% {
-        transform: translateY(-110vh) scale(1.5);
+        transform: translateY(-120vh) scale(1.6) rotate(360deg);
         opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .planeta {
+        width: 140px;
+        height: 140px;
+        opacity: 0.7;
+      }
+
+      .planeta::before {
+        width: 200px;
+        height: 45px;
+        top: 50px;
+        left: -30px;
       }
     }
   </style>
@@ -117,41 +197,50 @@
 
 <body>
 
+  <div class="galaxia"></div>
+  <div class="planeta"></div>
+
   <div class="card">
-    <h1>Para alguien especial 💖</h1>
+    <h1>Amor Galáctico 💫</h1>
 
-    <div class="texto">
-      Desde que apareciste, todo tiene otro brillo...
-    </div>
+    <p>
+      Si el universo tuviera un secreto bonito, seguramente tendría tu nombre
+      escrito entre estrellas, lunas y constelaciones.
+    </p>
 
-    <button onclick="mostrar()">Descubre 💌</button>
+    <p class="frase">
+      “Contigo, hasta el infinito parece quedarse corto.”
+    </p>
 
-    <div class="extra" id="extra">
-      No es casualidad que piense en ti… es inevitable. ✨
+    <button onclick="mostrarMensaje()">Abrir mensaje 💌</button>
+
+    <div class="mensaje" id="mensaje">
+      Eres mi galaxia favorita, mi estrella más brillante y mi lugar bonito en este universo. 💖
     </div>
   </div>
 
   <script>
-    function mostrar() {
-      document.getElementById("extra").style.display = "block";
-    }
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.innerHTML = "❤";
 
-    function crearParticula() {
-      const p = document.createElement("div");
-      p.classList.add("particula");
-      p.innerHTML = "❤";
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.fontSize = (16 + Math.random() * 28) + "px";
+      corazon.style.animationDuration = (5 + Math.random() * 5) + "s";
 
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDuration = (4 + Math.random() * 5) + "s";
-
-      document.body.appendChild(p);
+      document.body.appendChild(corazon);
 
       setTimeout(() => {
-        p.remove();
-      }, 9000);
+        corazon.remove();
+      }, 10000);
     }
 
-    setInterval(crearParticula, 250);
+    setInterval(crearCorazon, 350);
+
+    function mostrarMensaje() {
+      document.getElementById("mensaje").style.display = "block";
+    }
   </script>
 
 </body>
