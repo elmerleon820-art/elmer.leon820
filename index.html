@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle Especial 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Georgia", serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #ff9eb5, #ff4f8b, #7b2c56);
+      background-size: 600% 600%;
+      animation: fondo 12s ease infinite;
+      overflow: hidden;
+      color: white;
+    }
+
+    @keyframes fondo {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      text-align: center;
+      padding: 50px 30px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      max-width: 600px;
+      width: 90%;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #fff0f5;
+    }
+
+    .texto {
+      font-size: 1.3rem;
+      border-right: 3px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: escribir 4s steps(50) forwards, parpadeo 0.8s infinite;
+    }
+
+    @keyframes escribir {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes parpadeo {
+      50% { border-color: transparent; }
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 40px;
+      background: #ff4f8b;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff9eb5;
+    }
+
+    .extra {
+      margin-top: 20px;
+      display: none;
+      font-size: 1.2rem;
+    }
+
+    /* partículas */
+    .particula {
+      position: absolute;
+      bottom: -20px;
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      animation: subir linear infinite;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Para alguien especial 💖</h1>
+
+    <div class="texto">
+      Desde que apareciste, todo tiene otro brillo...
+    </div>
+
+    <button onclick="mostrar()">Descubre 💌</button>
+
+    <div class="extra" id="extra">
+      No es casualidad que piense en ti… es inevitable. ✨
+    </div>
+  </div>
+
+  <script>
+    function mostrar() {
+      document.getElementById("extra").style.display = "block";
+    }
+
+    function crearParticula() {
+      const p = document.createElement("div");
+      p.classList.add("particula");
+      p.innerHTML = "❤";
+
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+      document.body.appendChild(p);
+
+      setTimeout(() => {
+        p.remove();
+      }, 9000);
+    }
+
+    setInterval(crearParticula, 250);
+  </script>
+
+</body>
+</html>
