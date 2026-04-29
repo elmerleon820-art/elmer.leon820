@@ -200,12 +200,30 @@
 .galaxia, .planeta {
   pointer-events: none;
 }
+    .boton-flores {
+  position: fixed;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  z-index: 9999;
+background: linear-gradient(45deg, #ff4fa3, #7b5cff);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 0, 150, 0.6);
+  transition: 0.3s;
+}
+    .boton-flores:hover {
+  transform: translateY(-50%) scale(1.1);
+}
   </style>
 </head>
 
 <body>
-<a href="flores.html">
-  <button>Ir a Flores 🌸</button>
+<a class="boton-flores" href="flores.html">
+  Ir a Flores 🌸
 </a>
   <div class="galaxia"></div>
   <div class="planeta"></div>
