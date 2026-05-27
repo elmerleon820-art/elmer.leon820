@@ -2,90 +2,82 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Georgia, serif;
 }
 
 body {
   min-height: 100vh;
   overflow: hidden;
-  background: radial-gradient(circle at top, #ffb6d9, #3b0a45, #120018);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #03030a;
+  font-family: Arial, sans-serif;
 }
 
-.contenedor {
-  position: relative;
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.contenido {
+  position: fixed;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
   text-align: center;
 }
 
-.libro {
-  width: 360px;
-  height: 480px;
-  position: relative;
-  perspective: 1600px;
-  margin-bottom: 30px;
-}
-
-.pagina {
-  position: absolute;
-  inset: 0;
-  padding: 45px 35px;
-  background: linear-gradient(135deg, #fff7fb, #ffe0ef);
-  border: 2px solid #ffc2df;
-  border-radius: 18px;
-  box-shadow: 0 25px 55px rgba(0,0,0,0.4);
-  color: #4b1839;
-  opacity: 0;
-  transform: rotateY(90deg);
-  transition: 0.8s ease;
-}
-
-.pagina.activa {
-  opacity: 1;
-  transform: rotateY(0);
-}
-
-.pagina h1 {
-  color: #c2185b;
-  margin-bottom: 25px;
-  font-size: 2rem;
-}
-
-.pagina p {
-  font-size: 1.15rem;
-  line-height: 1.8;
+.marca {
+  color: rgba(255, 120, 200, 0.85);
+  letter-spacing: 3px;
+  font-size: 0.75rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 15px rgba(255, 60, 170, 0.8);
 }
 
 button {
-  padding: 14px 35px;
   border: none;
-  border-radius: 35px;
-  background: linear-gradient(45deg, #ff4fa3, #7b5cff);
+  padding: 12px 24px;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #ff2f91, #ff8fd0);
   color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 25px rgba(255, 79, 163, 0.7);
-  transition: 0.3s;
+  box-shadow: 0 0 25px rgba(255, 60, 170, 0.65);
+  transition: 0.3s ease;
 }
 
 button:hover {
   transform: scale(1.08);
+  box-shadow: 0 0 45px rgba(255, 100, 200, 0.9);
+}
+.video-arriba {
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ff7ac8;
+  margin-bottom: 14px;
+  box-shadow:
+    0 0 18px rgba(255, 80, 180, 0.9),
+    0 0 45px rgba(255, 20, 140, 0.65);
+  animation: flotarVideo 3s ease-in-out infinite;
 }
 
-.corazon {
-  position: fixed;
-  bottom: -40px;
-  color: rgba(255, 190, 230, 0.8);
-  font-size: 22px;
-  animation: subir linear forwards;
-  pointer-events: none;
-}
-
-@keyframes subir {
-  to {
-    transform: translateY(-120vh) rotate(360deg);
-    opacity: 0;
+@keyframes flotarVideo {
+  0%, 100% {
+    transform: translateY(0) scale(1);
   }
+
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
