@@ -8,236 +8,252 @@
 body {
   min-height: 100vh;
   overflow: hidden;
-  background: #000;
-  color: white;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 80, 170, 0.55), transparent 25%),
+    radial-gradient(circle at 80% 15%, rgba(255, 30, 150, 0.45), transparent 22%),
+    linear-gradient(135deg, #2a001e, #620047, #12000f);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
-/* CORAZONES ROJOS DEL FONDO */
+/* FONDO CON CORAZONES */
 .fondo-corazones::before,
 .fondo-corazones::after {
-  content: "❤     ❤     ❤     ❤     ❤";
+  content: "♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡";
   position: fixed;
+  color: rgba(255, 180, 225, 0.35);
+  font-size: 42px;
+  letter-spacing: 18px;
   width: 100%;
-  left: 0;
-  color: rgba(255, 0, 0, 0.75);
-  font-size: 58px;
-  letter-spacing: 55px;
-  text-shadow: 0 0 18px red;
-  animation: moverCorazones 8s linear infinite;
-  z-index: 1;
+  animation: moverFondo 12s linear infinite;
 }
 
 .fondo-corazones::before {
-  top: 30px;
+  top: 25px;
+  left: -40px;
 }
 
 .fondo-corazones::after {
-  bottom: 35px;
+  bottom: 25px;
+  right: -40px;
   animation-direction: reverse;
 }
 
-@keyframes moverCorazones {
+@keyframes moverFondo {
   from {
     transform: translateX(-80px);
   }
-
   to {
     transform: translateX(80px);
   }
 }
 
-/* ESCENA GENERAL */
-.escena {
+/* CONTENEDOR */
+.contenedor {
+  width: 92%;
+  max-width: 430px;
+  min-height: 620px;
   position: relative;
-  width: 100%;
-  height: 100vh;
-  perspective: 900px;
-  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.firma {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+/* MENSAJE INICIAL */
+.mensaje-inicial {
+  margin-top: 35px;
+  width: 92%;
+  background: rgba(0, 80, 65, 0.85);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  box-shadow: 0 0 25px rgba(0, 255, 190, 0.25);
+  animation: aparecer 1s ease;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #d9fff4;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
-.titulo {
+.contenido-msj {
+  flex: 1;
+}
+
+.contenido-msj h3 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.contenido-msj p {
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+.boton-click {
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.mano {
   position: absolute;
-  top: 20%;
-  font-size: 2.4rem;
-  color: #ffd6f0;
-  text-shadow:
-    0 0 12px #ff8fd0,
-    0 0 30px #ff2f91;
-  animation: brilloTitulo 2s ease-in-out infinite;
-  z-index: 20;
+  right: 12px;
+  bottom: -38px;
+  font-size: 2.2rem;
+  animation: tocar 1s infinite;
 }
 
-@keyframes brilloTitulo {
+@keyframes tocar {
   0%, 100% {
-    opacity: 0.75;
+    transform: translateY(0) rotate(-15deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-15deg);
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mensaje-inicial.ocultar {
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+  transition: 0.8s ease;
+}
+
+/* SORPRESA */
+.sorpresa {
+  display: none;
+  width: 100%;
+  text-align: center;
+  margin-top: 55px;
+}
+
+.sorpresa.activa {
+  display: block;
+  animation: aparecer 1s ease;
+}
+
+.titulo-amor {
+  font-size: 2.7rem;
+  color: #ff7ac8;
+  text-shadow:
+    0 0 10px #ff4fb3,
+    0 0 25px #ff1493,
+    0 0 45px #ff0080;
+  margin-bottom: 35px;
+  opacity: 0;
+  animation: encender 1.4s ease forwards;
+}
+
+@keyframes encender {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
     transform: scale(1);
   }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
 }
 
-/* GALAXIA */
-.galaxia {
-  position: relative;
-  width: 900px;
-  height: 500px;
-  transform-style: preserve-3d;
-  transform: rotateX(65deg);
-  animation: flotarGalaxia 5s ease-in-out infinite;
+/* VENTANA DE CÓDIGO */
+.codigo-card {
+  width: 92%;
+  margin: auto;
+  background: rgba(5, 20, 35, 0.94);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 0 35px rgba(255, 50, 165, 0.45);
+  border: 1px solid rgba(255, 150, 220, 0.25);
 }
 
-@keyframes flotarGalaxia {
-  0%, 100% {
-    transform: rotateX(65deg) translateY(0);
-  }
-
-  50% {
-    transform: rotateX(65deg) translateY(-18px);
-  }
+.barra {
+  height: 38px;
+  background: #09111f;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* ANILLO CENTRAL */
-.agujero-negro {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 250px;
-  height: 90px;
-  transform: translate(-50%, -50%);
+.barra span {
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, #ffffff 0%, #ffb6e8 25%, #ff4fa3 45%, transparent 70%);
-  box-shadow:
-    0 0 35px #ff8fd0,
-    0 0 90px #ff2f91,
-    0 0 130px rgba(255, 50, 170, 0.8);
-  animation: girarAnillo 4s linear infinite;
-  z-index: 10;
 }
 
-.centro {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 115px;
-  height: 55px;
-  transform: translate(-50%, -50%);
-  background: #020202;
-  border-radius: 50%;
-  box-shadow: inset 0 0 25px #000;
+.barra span:nth-child(1) {
+  background: #ff5f56;
 }
 
-@keyframes girarAnillo {
-  from {
-    filter: hue-rotate(0deg);
-  }
-
-  to {
-    filter: hue-rotate(360deg);
-  }
+.barra span:nth-child(2) {
+  background: #ffbd2e;
 }
 
-/* ÓRBITAS */
-.orbita {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 780px;
-  height: 260px;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-  animation: rotarOrbita 18s linear infinite;
+.barra span:nth-child(3) {
+  background: #27c93f;
 }
 
-@keyframes rotarOrbita {
-  from {
-    transform: translate(-50%, -50%) rotateZ(0deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotateZ(360deg);
-  }
+.barra p {
+  margin-left: 10px;
+  font-size: 0.78rem;
+  color: #9fb8d8;
 }
 
-/* FRASES */
-.frases span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  color: white;
-  font-size: 1rem;
-  white-space: nowrap;
-  text-shadow:
-    0 0 8px #ffffff,
-    0 0 18px #ff8fd0;
-  transform:
-    rotate(calc(var(--i) * 30deg))
-    translateX(330px)
-    rotate(calc(var(--i) * -30deg));
+pre {
+  min-height: 250px;
+  padding: 18px;
+  color: #a8ffcf;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
 }
 
-/* FLORES Y CORAZONES */
-.flores {
-  width: 900px;
-  height: 320px;
-  animation-duration: 12s;
-  animation-direction: reverse;
-}
-
-.flores span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  font-size: 2rem;
-  filter: drop-shadow(0 0 10px #ff5fa8);
-  transform:
-    rotate(calc(var(--i) * 30deg))
-    translateX(390px)
-    rotate(calc(var(--i) * -30deg));
-}
-
-/* POLVO ESTELAR */
-.polvo {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,120,210,0.9) 1px, transparent 1px);
-  background-size: 22px 22px, 35px 35px;
-  opacity: 0.6;
-  animation: moverPolvo 5s linear infinite;
-  mask-image: radial-gradient(ellipse, black 20%, transparent 75%);
-}
-
-@keyframes moverPolvo {
-  from {
-    background-position: 0 0, 0 0;
-  }
-
-  to {
-    background-position: 120px 80px, -100px -60px;
-  }
-}
-
-/* CORAZONES CAYENDO */
 .corazon-cae {
   position: fixed;
   top: -40px;
-  color: rgba(255, 0, 0, 0.85);
-  text-shadow: 0 0 15px red;
+  color: rgba(255, 130, 210, 0.75);
   pointer-events: none;
   animation: caer linear forwards;
-  z-index: 2;
+  z-index: 1;
 }
 
 @keyframes caer {
@@ -247,66 +263,94 @@ body {
   }
 }
 
-/* RESPONSIVE */
-@media (max-width: 700px) {
-  .titulo {
-    top: 22%;
-    font-size: 1.8rem;
+@media (max-width: 500px) {
+  .contenedor {
+    min-height: 560px;
   }
 
-  .galaxia {
-    width: 650px;
-    height: 420px;
-    transform: rotateX(65deg) scale(0.75);
+  .titulo-amor {
+    font-size: 2.2rem;
   }
 
-  .orbita {
-    width: 600px;
-  }
-
-  .frases span {
-    font-size: 0.75rem;
-    transform:
-      rotate(calc(var(--i) * 30deg))
-      translateX(230px)
-      rotate(calc(var(--i) * -30deg));
-  }
-
-  .flores span {
-    font-size: 1.4rem;
-    transform:
-      rotate(calc(var(--i) * 30deg))
-      translateX(290px)
-      rotate(calc(var(--i) * -30deg));
-  }
-
-  .agujero-negro {
-    width: 190px;
-    height: 70px;
-  }
-
-  .centro {
-    width: 85px;
-    height: 42px;
+  pre {
+    font-size: 0.78rem;
   }
 }
+.zona-superior-amor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.foto-amor {
+  width: 115px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ff9bd6;
+  box-shadow:
+    0 0 20px rgba(255, 90, 180, 0.8),
+    0 0 45px rgba(255, 20, 140, 0.5);
+  animation: flotarFoto 3s ease-in-out infinite;
+}
+
+@keyframes flotarFoto {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+.zona-arriba {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 20;
+}
+
+.foto-arriba {
+  width: 105px;
+  height: 105px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ff8fd0;
+  box-shadow:
+    0 0 18px rgba(255, 120, 210, 0.9),
+    0 0 45px rgba(255, 20, 150, 0.55);
+  animation: flotarFoto 3s ease-in-out infinite;
+}
+
+@keyframes flotarFoto {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
 .btn-musica {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 999;
   border: none;
-  padding: 10px 18px;
+  padding: 9px 20px;
   border-radius: 25px;
-  background: linear-gradient(45deg, #ff0033, #ff6b6b);
+  background: linear-gradient(45deg, #ff4fa3, #ff9bc7);
   color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.75);
+  box-shadow: 0 8px 22px rgba(255, 80, 170, 0.5);
   transition: 0.3s ease;
 }
 
 .btn-musica:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 35px rgba(255, 0, 0, 1);
+  background: linear-gradient(45deg, #ff2f91, #ff75b8);
 }

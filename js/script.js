@@ -1,181 +1,83 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const sorpresa = document.getElementById("sorpresa");
+const mensajeInicial = document.getElementById("mensajeInicial");
+const codigoTexto = document.getElementById("codigoTexto");
 
-let ancho = canvas.width = window.innerWidth;
-let alto = canvas.height = window.innerHeight;
-
-const frases = [
-  "GRACIAS",
-  "POR EXISTIR",
-  "TE AMO",
-  "MI VIDA",
-  "PIENSO EN TI"
+const lineasCodigo = [
+  ".love-you {",
+  "  I love you even more: TE AMO;",
+  "  unique darling: 100%;",
+  "  naturally divine: 'mi corazón';",
+  "  my heart: center;",
+  "  beautiful girl: #ff4fa3;",
+  "  tenderness: 0 0 25px pink;",
+  "}",
+  "",
+  ".mi-corazon {",
+  "  content: 'solo tú';",
+  "  animation: latir 1.5s infinite;",
+  "}",
+  "",
+  "@keyframes latir {",
+  "  0% { transform: scale(1); }",
+  "  50% { transform: scale(1.2); }",
+  "  100% { ERES UNICA: SOLO TU(1); }",
+  "}"
 ];
 
-let fraseActual = 0;
-let particulas = [];
-let estrellas = [];
+let escribiendo = false;
 
-window.addEventListener("resize", () => {
-  ancho = canvas.width = window.innerWidth;
-  alto = canvas.height = window.innerHeight;
-  crearTexto(frases[fraseActual]);
-  crearEstrellas();
-});
+function iniciarSorpresa() {
+  if (escribiendo) return;
 
-class Particula {
-  constructor(x, y, destinoX, destinoY) {
-    this.x = Math.random() * ancho;
-    this.y = Math.random() * alto;
-    this.destinoX = destinoX;
-    this.destinoY = destinoY;
-    this.size = Math.random() * 2.2 + 1;
-    this.velocidad = Math.random() * 0.045 + 0.025;
-    this.alpha = Math.random() * 0.8 + 0.2;
-    this.color = `rgba(255, ${40 + Math.random() * 80}, ${150 + Math.random() * 80}, ${this.alpha})`;
-  }
-
-  actualizar() {
-    this.x += (this.destinoX - this.x) * this.velocidad;
-    this.y += (this.destinoY - this.y) * this.velocidad;
-  }
-
-  dibujar() {
-    ctx.beginPath();
-    ctx.fillStyle = this.color;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = "#ff2f91";
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  dispersar() {
-    this.destinoX = Math.random() * ancho;
-    this.destinoY = Math.random() * alto;
-  }
-}
-
-class Estrella {
-  constructor() {
-    this.x = Math.random() * ancho;
-    this.y = Math.random() * alto;
-    this.size = Math.random() * 1.5;
-    this.alpha = Math.random();
-    this.velocidad = Math.random() * 0.02 + 0.005;
-  }
-
-  actualizar() {
-    this.alpha += this.velocidad;
-
-    if (this.alpha > 1 || this.alpha < 0.15) {
-      this.velocidad *= -1;
-    }
-  }
-
-  dibujar() {
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(255, 120, 200, ${this.alpha})`;
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = "#ff4fa3";
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
-function crearEstrellas() {
-  estrellas = [];
-
-  for (let i = 0; i < 120; i++) {
-    estrellas.push(new Estrella());
-  }
-}
-
-function crearTexto(texto) {
-  particulas = [];
-
-  const canvasTexto = document.createElement("canvas");
-  const ctxTexto = canvasTexto.getContext("2d");
-
-  canvasTexto.width = ancho;
-  canvasTexto.height = alto;
-
-  let tamanoFuente = ancho < 600 ? 45 : 90;
-
-  ctxTexto.fillStyle = "white";
-  ctxTexto.font = `bold ${tamanoFuente}px Arial`;
-  ctxTexto.textAlign = "center";
-  ctxTexto.textBaseline = "middle";
-
-  ctxTexto.fillText(texto, ancho / 2, alto / 2);
-
-  const datos = ctxTexto.getImageData(0, 0, ancho, alto).data;
-
-  for (let y = 0; y < alto; y += 5) {
-    for (let x = 0; x < ancho; x += 5) {
-      const index = (y * ancho + x) * 4;
-
-      if (datos[index + 3] > 128) {
-        particulas.push(new Particula(x, y, x, y));
-      }
-    }
-  }
-}
-
-function cambiarTextoAutomatico() {
-  particulas.forEach(p => p.dispersar());
+  escribiendo = true;
+  mensajeInicial.classList.add("ocultar");
 
   setTimeout(() => {
-    fraseActual++;
+    mensajeInicial.style.display = "none";
+    sorpresa.classList.add("activa");
+    escribirCodigo();
+  }, 700);
+}
 
-    if (fraseActual >= frases.length) {
-      fraseActual = 0;
+function escribirCodigo() {
+  let textoCompleto = "";
+  let linea = 0;
+  let caracter = 0;
+
+  const intervalo = setInterval(() => {
+    if (linea < lineasCodigo.length) {
+      if (caracter < lineasCodigo[linea].length) {
+        textoCompleto += lineasCodigo[linea][caracter];
+        caracter++;
+      } else {
+        textoCompleto += "\n";
+        linea++;
+        caracter = 0;
+      }
+
+      codigoTexto.textContent = textoCompleto;
+    } else {
+      clearInterval(intervalo);
     }
-
-    crearTexto(frases[fraseActual]);
-  }, 900);
+  }, 45);
 }
 
-function siguienteTexto() {
-  cambiarTextoAutomatico();
+/* corazones cayendo */
+function crearCorazon() {
+  const corazon = document.createElement("div");
+  corazon.className = "corazon-cae";
+  corazon.innerHTML = "❤";
+
+  corazon.style.left = Math.random() * 100 + "vw";
+  corazon.style.fontSize = 14 + Math.random() * 26 + "px";
+  corazon.style.animationDuration = 4 + Math.random() * 5 + "s";
+
+  document.body.appendChild(corazon);
+
+  setTimeout(() => {
+    corazon.remove();
+  }, 9000);
 }
-
-function animar() {
-  ctx.clearRect(0, 0, ancho, alto);
-
-  const fondo = ctx.createRadialGradient(
-    ancho / 2,
-    alto / 2,
-    50,
-    ancho / 2,
-    alto / 2,
-    ancho
-  );
-
-  fondo.addColorStop(0, "#150014");
-  fondo.addColorStop(0.45, "#070010");
-  fondo.addColorStop(1, "#000000");
-
-  ctx.fillStyle = fondo;
-  ctx.fillRect(0, 0, ancho, alto);
-
-  estrellas.forEach(estrella => {
-    estrella.actualizar();
-    estrella.dibujar();
-  });
-
-  particulas.forEach(particula => {
-    particula.actualizar();
-    particula.dibujar();
-  });
-
-  requestAnimationFrame(animar);
-}
-
-crearEstrellas();
-crearTexto(frases[fraseActual]);
-animar();
-
-setInterval(cambiarTextoAutomatico, 4500);
 function activarMusica() {
   const musica = document.getElementById("musicaFondo");
   musica.volume = 0.35;
