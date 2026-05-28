@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librito de Amor 💖</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <audio id="musicaFondo" autoplay loop>
+  <source src="audio/La da dee (Spanish Version) (1).mp3" type="audio/mpeg">
+</audio>
+
+<button class="btn-musica" onclick="activarMusica()">🎵 Música</button>
+
+  <div class="texto-arriba">
+    <p>Te mentí,</p>
+    <p>no me fui a dormir</p>
+    <p>estaba haciendo tu librito  con mucho amor🥺🌹</p>
+  </div>
+
+  <main class="libro">
+
+    <!-- PÁGINA IZQUIERDA -->
+    <section class="pagina izquierda">
+      <div class="corazones">♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥</div>
+
+      <div class="tarjeta">
+        <h2 id="tituloIzquierda">Mi librito especial</h2>
+
+        <div class="imagen-portada" id="imagenPortada">
+          <video class="video-portada" autoplay muted loop playsinline>
+           <source src="video/WhatsApp Video 2026-05-23 at 11.05.27 AM.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <p id="textoIzquierda">
+          Un pequeño detalle hecho con mucho cariño.
+        </p>
+      </div>
+
+      <h1 id="fraseIzquierda">TE AMO</h1>
+
+      <div class="corazones abajo">♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥</div>
+    </section>
+
+    <!-- PÁGINA DERECHA -->
+    <section class="pagina derecha">
+      <div class="corazones">♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥</div>
+
+      <div class="contenido-derecha">
+        <div class="corazon-texto">
+          <p id="mensajePagina">Bienvenida a mi agenda  💖</p>
+        </div>
+      </div>
+
+      <h1 id="fraseDerecha">PARA TI</h1>
+
+      <div class="corazones abajo">♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥</div>
+    </section>
+
+  </main>
+
+  <div class="contador">
+    Página <span id="numeroPagina">1</span> / 10
+  </div>
+
+  <div class="botones-pagina">
+    <button class="btn-pagina" onclick="paginaAnterior()">⬅ Anterior</button>
+    <button class="btn-pagina" onclick="paginaSiguiente()">Siguiente ➜</button>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

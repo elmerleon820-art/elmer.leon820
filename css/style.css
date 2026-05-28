@@ -1,0 +1,488 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Trebuchet MS", cursive;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8f8f8, #e9e9e9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* TEXTO SUPERIOR */
+.texto-arriba {
+  text-align: center;
+  margin-bottom: 22px;
+  color: #111;
+  font-size: 1.45rem;
+  line-height: 1.55;
+  font-family: Arial, sans-serif;
+}
+
+/* LIBRO */
+.libro {
+  width: 92%;
+  max-width: 780px;
+  height: 445px;
+  display: flex;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 75px rgba(0, 0, 0, 0.25);
+  animation: aparecer 1s ease;
+  z-index: 10;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* DOBLEZ CENTRAL */
+.libro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 9px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.18),
+    rgba(255,255,255,0.28),
+    rgba(0,0,0,0.16)
+  );
+  z-index: 8;
+}
+
+/* PÁGINAS */
+.pagina {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  padding: 25px 18px;
+  text-align: center;
+  transition: 0.6s ease;
+}
+
+.izquierda {
+  background: linear-gradient(135deg, #ff8fc3, #ff65ad);
+}
+
+.derecha {
+  background: linear-gradient(135deg, #ffd3e1, #ffb6d6);
+}
+
+/* CORAZONES SUPERIOR E INFERIOR */
+.corazones {
+  color: #111;
+  font-size: 1rem;
+  letter-spacing: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.abajo {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  right: 18px;
+}
+
+/* TARJETA */
+.tarjeta {
+  width: 88%;
+  height: 250px;
+  margin: auto;
+  background: rgba(255, 238, 247, 0.95);
+  border-radius: 16px;
+  position: relative;
+  padding: 18px 18px 10px;
+  box-shadow: inset 0 0 15px rgba(255,255,255,0.8);
+  overflow: hidden;
+}
+
+.tarjeta h2 {
+  color: #111;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  transform: rotate(-2deg);
+}
+
+.tarjeta p {
+  color: #111;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  margin-top: 8px;
+}
+
+/* IMAGEN DE CARÁTULA */
+.imagen-portada {
+  width: 145px;
+  height: 115px;
+  margin: 8px auto;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 8px 18px rgba(255, 60, 150, 0.35);
+  background: #ffc9df;
+}
+
+.imagen-portada img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CORAZÓN GRANDE */
+.corazon-grande {
+  width: 145px;
+  height: 125px;
+  background: #ff5fa8;
+  margin: 15px auto 0;
+  position: relative;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 20px rgba(255, 60, 150, 0.55);
+  animation: latido 1.4s infinite;
+  font-size: 0;
+}
+
+.corazon-grande::before,
+.corazon-grande::after {
+  content: "";
+  position: absolute;
+  width: 145px;
+  height: 125px;
+  background: #ff5fa8;
+  border-radius: 50%;
+}
+
+.corazon-grande::before {
+  top: -62px;
+  left: 0;
+}
+
+.corazon-grande::after {
+  left: 62px;
+  top: 0;
+}
+
+.texto-corazon-tu::after {
+  content: "Tú";
+  position: absolute;
+  top: 118px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2.2rem;
+  font-weight: bold;
+  z-index: 4;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* OSITO */
+.osito {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.oreja {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background: white;
+  border: 6px solid #111;
+  border-radius: 50%;
+  top: -42px;
+}
+
+.izquierda-o {
+  left: -85px;
+}
+
+.derecha-o {
+  right: -85px;
+}
+
+.cara {
+  width: 145px;
+  height: 95px;
+  background: white;
+  border: 6px solid #111;
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+}
+
+.cara span {
+  position: absolute;
+  top: 35px;
+  width: 11px;
+  height: 11px;
+  background: #111;
+  border-radius: 50%;
+}
+
+.cara span:first-child {
+  left: 42px;
+}
+
+.cara span:nth-child(2) {
+  right: 42px;
+}
+
+.cara p {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  color: #111;
+}
+
+/* TÍTULOS GRANDES */
+.pagina h1 {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 1.55rem;
+  letter-spacing: 2px;
+  color: #111;
+}
+
+/* CORAZÓN DERECHO */
+.contenido-derecha {
+  height: 265px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.corazon-texto {
+  width: 215px;
+  height: 190px;
+  background: rgba(255, 91, 165, 0.72);
+  transform: rotate(-45deg);
+  position: relative;
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.45);
+  animation: latido 1.5s infinite;
+}
+
+.corazon-texto::before,
+.corazon-texto::after {
+  content: "";
+  position: absolute;
+  width: 215px;
+  height: 190px;
+  background: rgba(255, 91, 165, 0.72);
+  border-radius: 50%;
+}
+
+.corazon-texto::before {
+  top: -94px;
+  left: 0;
+}
+
+.corazon-texto::after {
+  left: 94px;
+  top: 0;
+}
+
+.corazon-texto p {
+  position: absolute;
+  z-index: 5;
+  width: 215px;
+  top: 58px;
+  left: 0;
+  transform: rotate(45deg);
+  color: white;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  padding: 10px;
+}
+
+/* ANIMACIÓN LATIDO */
+@keyframes latido {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.08);
+  }
+}
+
+/* CONTADOR */
+.contador {
+  margin-top: 16px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* BOTONES */
+.botones-pagina {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  z-index: 50;
+  position: relative;
+}
+
+.btn-pagina {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #ff5fa8, #ff9bc7);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 95, 168, 0.45);
+  transition: 0.3s ease;
+}
+
+.btn-pagina:hover {
+  transform: scale(1.08);
+  background: linear-gradient(45deg, #ff2f91, #ff75b8);
+}
+
+/* ANIMACIÓN AL CAMBIAR */
+.pagina.animar {
+  animation: cambiar 0.5s ease;
+}
+
+@keyframes cambiar {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* CORAZONES DE FONDO */
+.corazon-fondo {
+  position: fixed;
+  bottom: -40px;
+  color: rgba(255, 105, 180, 0.35);
+  pointer-events: none;
+  animation: subirFondo linear forwards;
+  z-index: 1;
+}
+
+@keyframes subirFondo {
+  to {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .libro {
+    height: 390px;
+  }
+
+  .texto-arriba {
+    font-size: 1.08rem;
+  }
+
+  .tarjeta {
+    height: 220px;
+  }
+
+  .tarjeta h2 {
+    font-size: 1rem;
+  }
+
+  .tarjeta p {
+    font-size: 0.82rem;
+  }
+
+  .imagen-portada {
+    width: 120px;
+    height: 90px;
+  }
+
+  .pagina h1 {
+    font-size: 1.15rem;
+  }
+
+  .corazon-texto {
+    width: 155px;
+    height: 135px;
+  }
+
+  .corazon-texto::before,
+  .corazon-texto::after {
+    width: 155px;
+    height: 135px;
+  }
+
+  .corazon-texto::before {
+    top: -67px;
+  }
+
+  .corazon-texto::after {
+    left: 67px;
+  }
+
+  .corazon-texto p {
+    width: 155px;
+    font-size: 0.95rem;
+    top: 36px;
+  }
+
+  .btn-pagina {
+    padding: 10px 17px;
+    font-size: 0.88rem;
+  }
+}
+.btn-musica {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 999;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff5fa8, #ff9bc7);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 95, 168, 0.45);
+  transition: 0.3s ease;
+}
+
+.btn-musica:hover {
+  transform: scale(1.08);
+}
+.imagen-portada video,
+.video-portada {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
