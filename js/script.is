@@ -1,0 +1,22 @@
+function crearCorazon() {
+  const corazon = document.createElement("div");
+  corazon.className = "corazon-cae";
+  corazon.innerHTML = "❤";
+
+  corazon.style.left = Math.random() * 100 + "vw";
+  corazon.style.fontSize = 20 + Math.random() * 35 + "px";
+  corazon.style.animationDuration = 5 + Math.random() * 6 + "s";
+
+  document.body.appendChild(corazon);
+
+  setTimeout(() => {
+    corazon.remove();
+  }, 11000);
+}
+
+setInterval(crearCorazon, 500);
+function activarMusica() {
+  const musica = document.getElementById("musicaFondo");
+  musica.volume = 0.35;
+  musica.play();
+}

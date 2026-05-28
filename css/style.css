@@ -2,82 +2,311 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
 body {
   min-height: 100vh;
   overflow: hidden;
-  background: #03030a;
-  font-family: Arial, sans-serif;
-}
-
-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.contenido {
-  position: fixed;
-  bottom: 35px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  text-align: center;
-}
-
-.marca {
-  color: rgba(255, 120, 200, 0.85);
-  letter-spacing: 3px;
-  font-size: 0.75rem;
-  margin-bottom: 15px;
-  text-shadow: 0 0 15px rgba(255, 60, 170, 0.8);
-}
-
-button {
-  border: none;
-  padding: 12px 24px;
-  border-radius: 30px;
-  background: linear-gradient(45deg, #ff2f91, #ff8fd0);
+  background: #000;
   color: white;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 25px rgba(255, 60, 170, 0.65);
-  transition: 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 45px rgba(255, 100, 200, 0.9);
-}
-.video-arriba {
-  width: 125px;
-  height: 125px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid #ff7ac8;
-  margin-bottom: 14px;
-  box-shadow:
-    0 0 18px rgba(255, 80, 180, 0.9),
-    0 0 45px rgba(255, 20, 140, 0.65);
-  animation: flotarVideo 3s ease-in-out infinite;
+/* CORAZONES ROJOS DEL FONDO */
+.fondo-corazones::before,
+.fondo-corazones::after {
+  content: "❤     ❤     ❤     ❤     ❤";
+  position: fixed;
+  width: 100%;
+  left: 0;
+  color: rgba(255, 0, 0, 0.75);
+  font-size: 58px;
+  letter-spacing: 55px;
+  text-shadow: 0 0 18px red;
+  animation: moverCorazones 8s linear infinite;
+  z-index: 1;
 }
 
-@keyframes flotarVideo {
+.fondo-corazones::before {
+  top: 30px;
+}
+
+.fondo-corazones::after {
+  bottom: 35px;
+  animation-direction: reverse;
+}
+
+@keyframes moverCorazones {
+  from {
+    transform: translateX(-80px);
+  }
+
+  to {
+    transform: translateX(80px);
+  }
+}
+
+/* ESCENA GENERAL */
+.escena {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  perspective: 900px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo {
+  position: absolute;
+  top: 20%;
+  font-size: 2.4rem;
+  color: #ffd6f0;
+  text-shadow:
+    0 0 12px #ff8fd0,
+    0 0 30px #ff2f91;
+  animation: brilloTitulo 2s ease-in-out infinite;
+  z-index: 20;
+}
+
+@keyframes brilloTitulo {
   0%, 100% {
-    transform: translateY(0) scale(1);
+    opacity: 0.75;
+    transform: scale(1);
   }
 
   50% {
-    transform: translateY(-8px) scale(1.05);
+    opacity: 1;
+    transform: scale(1.05);
   }
 }
 
-.botones {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+/* GALAXIA */
+.galaxia {
+  position: relative;
+  width: 900px;
+  height: 500px;
+  transform-style: preserve-3d;
+  transform: rotateX(65deg);
+  animation: flotarGalaxia 5s ease-in-out infinite;
+}
+
+@keyframes flotarGalaxia {
+  0%, 100% {
+    transform: rotateX(65deg) translateY(0);
+  }
+
+  50% {
+    transform: rotateX(65deg) translateY(-18px);
+  }
+}
+
+/* ANILLO CENTRAL */
+.agujero-negro {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 250px;
+  height: 90px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #ffffff 0%, #ffb6e8 25%, #ff4fa3 45%, transparent 70%);
+  box-shadow:
+    0 0 35px #ff8fd0,
+    0 0 90px #ff2f91,
+    0 0 130px rgba(255, 50, 170, 0.8);
+  animation: girarAnillo 4s linear infinite;
+  z-index: 10;
+}
+
+.centro {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 115px;
+  height: 55px;
+  transform: translate(-50%, -50%);
+  background: #020202;
+  border-radius: 50%;
+  box-shadow: inset 0 0 25px #000;
+}
+
+@keyframes girarAnillo {
+  from {
+    filter: hue-rotate(0deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* ÓRBITAS */
+.orbita {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 780px;
+  height: 260px;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  animation: rotarOrbita 18s linear infinite;
+}
+
+@keyframes rotarOrbita {
+  from {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+/* FRASES */
+.frases span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: white;
+  font-size: 1rem;
+  white-space: nowrap;
+  text-shadow:
+    0 0 8px #ffffff,
+    0 0 18px #ff8fd0;
+  transform:
+    rotate(calc(var(--i) * 30deg))
+    translateX(330px)
+    rotate(calc(var(--i) * -30deg));
+}
+
+/* FLORES Y CORAZONES */
+.flores {
+  width: 900px;
+  height: 320px;
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+
+.flores span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px #ff5fa8);
+  transform:
+    rotate(calc(var(--i) * 30deg))
+    translateX(390px)
+    rotate(calc(var(--i) * -30deg));
+}
+
+/* POLVO ESTELAR */
+.polvo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,120,210,0.9) 1px, transparent 1px);
+  background-size: 22px 22px, 35px 35px;
+  opacity: 0.6;
+  animation: moverPolvo 5s linear infinite;
+  mask-image: radial-gradient(ellipse, black 20%, transparent 75%);
+}
+
+@keyframes moverPolvo {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 120px 80px, -100px -60px;
+  }
+}
+
+/* CORAZONES CAYENDO */
+.corazon-cae {
+  position: fixed;
+  top: -40px;
+  color: rgba(255, 0, 0, 0.85);
+  text-shadow: 0 0 15px red;
+  pointer-events: none;
+  animation: caer linear forwards;
+  z-index: 2;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .titulo {
+    top: 22%;
+    font-size: 1.8rem;
+  }
+
+  .galaxia {
+    width: 650px;
+    height: 420px;
+    transform: rotateX(65deg) scale(0.75);
+  }
+
+  .orbita {
+    width: 600px;
+  }
+
+  .frases span {
+    font-size: 0.75rem;
+    transform:
+      rotate(calc(var(--i) * 30deg))
+      translateX(230px)
+      rotate(calc(var(--i) * -30deg));
+  }
+
+  .flores span {
+    font-size: 1.4rem;
+    transform:
+      rotate(calc(var(--i) * 30deg))
+      translateX(290px)
+      rotate(calc(var(--i) * -30deg));
+  }
+
+  .agujero-negro {
+    width: 190px;
+    height: 70px;
+  }
+
+  .centro {
+    width: 85px;
+    height: 42px;
+  }
+}
+.btn-musica {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 999;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff0033, #ff6b6b);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.75);
+  transition: 0.3s ease;
+}
+
+.btn-musica:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 1);
 }
